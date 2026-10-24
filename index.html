@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MercadoFácil — Gestão para mercadinhos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="loginScreen" class="login-screen">
+    <section class="login-panel">
+      <div class="brand brand-login"><span class="brand-icon" aria-label="Mercado Fácil"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="8" width="48" height="48" rx="12" fill="currentColor"/><rect x="20" y="18" width="24" height="26" rx="4" fill="none" stroke="#fff" stroke-width="3"/><path d="M25 31.4l4.2 4.2 9.8-10.4" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 18h12l6 6v18" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg></span><span>Mercado<span>Fácil</span></span></div>
+      <h1>Gestão simples para o seu<br>mercadinho.</h1>
+      <p class="lead">Tudo o que seu mercado precisa: estoque, validade e financeiro sincronizados em tempo real</p>
+      <div class="login-tabs"><button class="active" data-auth-mode="login" type="button">Entrar</button><button data-auth-mode="signup" type="button">Criar conta</button></div>
+      <form id="loginForm">
+        <div id="nameField" class="auth-field hidden"><label for="name">Seu nome</label><div class="input-wrap"><span>♙</span><input id="name" type="text" autocomplete="name"></div></div>
+        <label for="email">E-mail</label>
+        <div class="input-wrap"><span>✉</span><input id="email" type="email" autocomplete="email" required></div>
+        <label for="password">Senha</label>
+        <div class="input-wrap"><span>♙</span><input id="password" type="password" autocomplete="current-password" required><button type="button" id="togglePassword">◉</button></div>
+        <button id="authSubmit" class="primary full" type="submit">⇥ &nbsp; Entrar</button>
+      </form>
+      <button id="forgotPassword" class="forgot" type="button">Esqueci minha senha</button>
+      <p id="authMessage" class="auth-message" role="alert"></p>
+      <div class="secure"><b>♢ &nbsp; Conta segura</b><p>Crie sua conta uma única vez com e-mail e senha. Seus produtos, vendas e alertas ficam salvos com segurança no sistema.</p></div>
+    </section>
+    <section class="login-image">
+      <div class="image-overlay"></div>
+      <div class="hero-copy"><h2>Tudo o que seu mercadinho precisa, sem complicação.</h2><div class="chips"><span>▣ Estoque</span><span>▦ Validade</span><span>ⓢ Financeiro</span><span>⌂ Unidades</span></div></div>
+    </section>
+  </div>
+
+  <div id="app" class="app hidden">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-icon" aria-label="Mercado Fácil"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="8" width="48" height="48" rx="12" fill="currentColor"/><rect x="20" y="18" width="24" height="26" rx="4" fill="none" stroke="#fff" stroke-width="3"/><path d="M25 31.4l4.2 4.2 9.8-10.4" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 18h12l6 6v18" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg></span><span>Mercado<span>Fácil</span></span></div>
+      <nav>
+        <div class="nav-section-label">Principal</div>
+        <button data-page="dashboard" class="nav-item active"><span class="nav-icon">▦</span><span id="navDashboardLabel">Dashboard</span></button>
+        <button data-page="estoque" class="nav-item"><span class="nav-icon">⌕</span><span id="navStockLabel">Estoque</span></button>
+        <button data-page="validade" class="nav-item"><span class="nav-icon">▣</span><span id="navExpiryLabel">Validade</span></button>
+        <button data-page="perda" class="nav-item staff-only"><span class="nav-icon">−</span><span id="navLossLabel">Registrar perda</span></button>
+        <button data-page="tarefas" class="nav-item staff-only"><span class="nav-icon">✓</span><span id="navTasksLabel">Minhas tarefas</span></button>
+        <div class="nav-section-label">Gestão</div>
+        <button data-page="financeiro" class="nav-item"><span class="nav-icon">ⓢ</span><span>Financeiro</span></button>
+        <button data-page="unidades" class="nav-item"><span class="nav-icon">⌂</span><span>Unidades</span></button>
+        <button data-page="relatorios" class="nav-item admin-only"><span class="nav-icon">▥</span><span>Relatórios</span></button>
+        <button data-page="perfis" class="nav-item admin-only hidden"><span class="nav-icon">♙</span><span>Gerenciar Perfis</span></button>
+        <button data-page="tarefas-equipe" class="nav-item admin-only"><span class="nav-icon">☑</span><span>Acompanhar Tarefas</span></button>
+        <div class="nav-section-label">Sistema</div>
+        <button data-page="config" class="nav-item"><span class="nav-icon">⚙</span><span id="navConfigLabel">Configurações</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-profile">
+          <div class="user"><div id="userAvatar" class="avatar">C</div><div><b id="userName">Camilly Dutra</b><small id="userEmail">camillydutra505@gmail.com</small></div></div>
+          <button id="logout">⇥ &nbsp; Sair</button>
+        </div>
+      </div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div><h2 id="pageTitle">Dashboard</h2><p id="pageSub">Resumo do seu mercadinho hoje</p></div><div class="topbar-tools"><select id="unitSelector" class="unit-selector" aria-label="Selecionar unidade"><option value="">Nenhuma unidade cadastrada</option></select><label class="header-search"><span aria-hidden="true">⌕</span><input id="headerProductSearch" type="search" placeholder="Buscar produto" aria-label="Buscar produto"></label><div id="topbarAvatar" class="topbar-avatar" aria-label="Perfil do usuário">MF</div><button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu">☰</button></div></header>
+      <div id="content"></div>
+    </main>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <button class="close" id="closeModal">×</button>
+      <h3 id="modalTitle">Adicionar produto</h3>
+      <form id="productForm">
+        <div class="form-grid">
+          <div><label>Produto</label><input id="pName" required></div>
+          <div><label>Categoria</label><select id="pCat"><option>Mercearia</option><option>Laticínios</option><option>Bebidas</option><option>Higiene</option><option>Limpeza</option></select></div>
+          <div><label>Quantidade</label><input id="pQty" type="number" min="0" required></div>
+          <div><label>Estoque mínimo</label><input id="pMin" type="number" min="0" value="5" required></div>
+          <div><label>Validade</label><input id="pDate" type="date" required></div>
+          <div><label>Preço</label><input id="pPrice" type="number" step="0.01" min="0" required></div>
+          <div><label for="pUnit">Unidade</label><select id="pUnit" required><option value="">Selecione uma unidade</option></select></div>
+        </div>
+        <button class="primary full">Salvar produto</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="unitModal" class="modal hidden">
+    <div class="modal-card">
+      <button class="close" id="closeUnitModal" type="button">×</button>
+      <h3>Adicionar unidade</h3>
+      <form id="unitForm">
+        <div class="form-grid">
+          <div><label for="unitName">Nome do ponto</label><input id="unitName" placeholder="Unidade Condomínio Flores" required></div>
+          <div><label for="unitLocation">Local / Condomínio</label><input id="unitLocation" required></div>
+          <div><label for="unitBlock">Torre / Bloco</label><input id="unitBlock" required></div>
+          <div><label for="unitManager">Responsável do local</label><input id="unitManager" placeholder="Nome e contato" required></div>
+          <div><label for="unitStatus">Status da unidade</label><select id="unitStatus"><option>Ativo</option><option>Em Manutenção</option><option>Desativado</option></select></div>
+        </div>
+        <button class="primary full" type="submit">Salvar unidade</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="resetModal" class="modal hidden">
+    <div class="modal-card reset-card">
+      <button class="close" id="closeResetModal" type="button">×</button>
+      <h3>Redefinir senha</h3>
+      <p id="resetIntro" class="muted">Informe o e-mail da sua conta para receber um código de verificação.</p>
+      <form id="resetForm">
+        <label for="resetEmail">E-mail</label>
+        <input id="resetEmail" class="reset-input" type="email" autocomplete="email" required>
+        <div id="resetVerification" class="hidden">
+          <label for="resetCode">Código de verificação</label>
+          <input id="resetCode" class="reset-input" inputmode="numeric" maxlength="6" placeholder="Digite o código recebido">
+          <label for="newPassword">Nova senha</label>
+          <input id="newPassword" class="reset-input" type="password" minlength="4" autocomplete="new-password">
+        </div>
+        <p id="resetMessage" class="auth-message" role="alert"></p>
+        <button id="resetSubmit" class="primary full" type="submit">Enviar código</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="profileModal" class="modal hidden">
+    <div class="modal-card profile-modal-card">
+      <button class="close" id="closeProfileModal" type="button" aria-label="Fechar">×</button>
+      <h3 id="profileModalTitle">Novo perfil</h3>
+      <p id="profileFormMessage" class="auth-message" role="alert"></p>
+      <form id="profileForm">
+        <div class="form-grid">
+          <div><label for="profileName">Nome</label><input id="profileName" autocomplete="name" required></div>
+          <div><label for="profileEmail">E-mail</label><input id="profileEmail" type="email" autocomplete="email" required></div>
+          <div><label for="profilePhone">Telefone</label><input id="profilePhone" type="tel" autocomplete="tel"></div>
+          <div class="profile-photo-field"><label for="profilePhoto">Foto do perfil</label><input id="profilePhoto" type="file" accept="image/jpeg,image/png,image/webp"><div class="profile-photo-preview-row"><img id="profilePhotoPreview" class="profile-photo-preview hidden" alt="Prévia da foto do perfil"><button id="removeProfilePhoto" class="secondary hidden" type="button">Remover foto</button></div><small class="muted">JPG, PNG ou WebP; até 5 MB.</small></div>
+          <div><label for="profileJobTitle">Cargo / função</label><select id="profileJobTitle" required><option value="">Selecione o cargo</option><option value="Caixa">Caixa</option><option value="Estoquista">Estoquista</option><option value="Função">Função</option></select></div>
+          <div class="profile-contract-field"><label for="profileRegistration">Matrícula</label><input id="profileRegistration" maxlength="40" placeholder="Ex.: MF-001"></div>
+          <div class="profile-contract-field"><label for="profileShift">Turno de trabalho</label><input id="profileShift" maxlength="80" placeholder="Ex.: Manhã · 08h às 14h"></div>
+          <div class="profile-contract-field"><label for="profileUnit">Unidade</label><select id="profileUnit"><option value="">Sem unidade associada</option></select></div>
+          <div class="profile-contract-field"><label for="profileDepartment">Departamento</label><input id="profileDepartment" maxlength="80" placeholder="Ex.: Estoque"></div>
+          <div><label for="profileType">Tipo de perfil</label><select id="profileType" required><option value="">Selecione o perfil</option><option value="admin">ADM</option><option value="manager">Gerente</option><option value="operator">Funcionário</option></select></div>
+          <div><label for="profileStatus">Status</label><select id="profileStatus" required><option value="active">Ativo</option><option value="inactive">Inativo</option><option value="blocked">Bloqueado</option><option value="pending">Pendente</option><option value="deleted">Excluído</option></select></div>
+          <div class="profile-password-field"><label for="profilePassword">Senha inicial</label><input id="profilePassword" type="password" minlength="4" autocomplete="new-password"></div>
+        </div>
+        <p id="profilePasswordHint" class="muted profile-password-hint">A senha inicial deve ter pelo menos 4 caracteres.</p>
+        <button class="primary full" type="submit">Salvar perfil</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="spreadsheetDestinationModal" class="modal hidden">
+    <div class="modal-card spreadsheet-destination-modal">
+      <button class="close" id="closeSpreadsheetDestination" type="button" aria-label="Fechar">×</button>
+      <h3>Unidade de destino</h3>
+      <p class="muted">Escolha em qual condomínio deseja importar cada planilha.</p>
+      <div id="spreadsheetDestinationList" class="spreadsheet-destination-list"></div>
+      <p id="spreadsheetDestinationMessage" class="spreadsheet-destination-message" role="status"></p>
+      <div class="spreadsheet-destination-actions">
+        <button id="cancelSpreadsheetDestination" class="secondary" type="button">Cancelar</button>
+        <button id="continueSpreadsheetDestination" class="primary" type="button">Continuar para prévia</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="spreadsheetPreviewModal" class="modal hidden">
+    <div class="modal-card spreadsheet-preview-modal">
+      <header class="spreadsheet-preview-header">
+        <div class="spreadsheet-preview-heading">
+          <div>
+            <h3>Prévia da importação</h3>
+            <p>Revise os dados antes de confirmar</p>
+            <small id="spreadsheetPreviewFilename"></small>
+          </div>
+          <button class="spreadsheet-preview-close" id="closeSpreadsheetPreview" type="button" aria-label="Fechar">×</button>
+        </div>
+        <div id="spreadsheetPreviewTabs" class="spreadsheet-preview-tabs"></div>
+      </header>
+      <div class="spreadsheet-preview-table-wrap">
+        <div class="spreadsheet-preview-table"></div>
+      </div>
+      <footer class="spreadsheet-preview-footer">
+        <div class="spreadsheet-preview-summary-row">
+          <p id="spreadsheetPreviewSummary"></p>
+          <span id="spreadsheetPreviewErrorBadge" class="spreadsheet-preview-error-badge hidden"></span>
+          <span id="spreadsheetPreviewDuplicateSummary" class="spreadsheet-preview-duplicate-summary"></span>
+          <span class="spreadsheet-preview-scroll-hint">Role para ver todas as linhas</span>
+        </div>
+        <div id="spreadsheetDuplicateOptions" class="spreadsheet-duplicate-options">
+          <label>O que fazer com produtos que já existem?</label>
+          <div class="spreadsheet-duplicate-choices" role="radiogroup" aria-label="Tratamento de produtos existentes">
+            <label><input type="radio" name="spreadsheetDuplicateChoice" value="sum"><span>Somar</span></label>
+            <label><input type="radio" name="spreadsheetDuplicateChoice" value="replace"><span>Substituir</span></label>
+            <label><input type="radio" name="spreadsheetDuplicateChoice" value="ignore"><span>Ignorar</span></label>
+          </div>
+          <select id="spreadsheetDuplicateMode" class="hidden" aria-hidden="true" tabindex="-1">
+            <option value="">Selecione uma ação</option>
+            <option value="sum">Somar quantidades</option>
+            <option value="replace">Substituir produtos existentes</option>
+            <option value="ignore">Ignorar produtos existentes</option>
+          </select>
+        </div>
+        <div class="spreadsheet-preview-actions">
+          <button id="cancelSpreadsheetImport" class="secondary" type="button">Cancelar</button>
+          <button id="confirmSpreadsheetImport" class="primary" type="button">Confirmar importação</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
